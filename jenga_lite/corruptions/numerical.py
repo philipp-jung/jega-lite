@@ -1,5 +1,4 @@
 import random
-
 import numpy as np
 
 from ..basis import TabularCorruption
