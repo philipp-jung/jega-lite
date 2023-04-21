@@ -88,14 +88,13 @@ class BrokenFormat(DataCorruption):
     def transform(self, data):
         date_patterns = ["%d-%m-%Y", "%Y-%m-%d", "%m-%d-%Y"]
         working_format = None
-        date = None
 
         test_value = data.iloc[0, self.column]
         for p in date_patterns:  # find right date format
             try:
-                date = datetime.datetime.strptime(test_value, p).date()
+                datetime.datetime.strptime(test_value, p).date()
                 working_format = p
-            except:
+            except ValueError:
                 pass
 
         if working_format is None:  # could not parse date
@@ -111,6 +110,6 @@ class BrokenFormat(DataCorruption):
                                                              working_format)\
                                                              .date()\
                                                              .strftime(bad_format)
-                corrupted_data.at[index, self.column] = column_value
+                corrupted_data.at[index, self.column] = corrupted_value
 
         return corrupted_data

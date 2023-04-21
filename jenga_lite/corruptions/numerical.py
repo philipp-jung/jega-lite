@@ -37,3 +37,16 @@ class Scaling(TabularCorruption):
             df.loc[rows, self.column] *= scale_factor
 
         return df
+
+class AddUnit(TabularCorruption):
+    """
+    Inspired by the beers dataset from Mahdavi et al. 2019, add varying 
+    units to numerical data.
+    
+    Turns 12 into
+    12 oz
+    12 OZ
+    12 oz.
+    12 ounce
+    """
+    raise ValueError('Not implemented yet.')
